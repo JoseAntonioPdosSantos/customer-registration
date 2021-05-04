@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: customer-registration-service
+logging:
+  level:
+    org:
+      springframework:
+        ws: TRACE
