@@ -1,9 +1,9 @@
 package com.capintani.customerregistration.service.customer;
 
-import com.capintani.customerregistration.model.Address;
 import com.capintani.customerregistration.model.Customer;
 import com.capintani.customerregistration.repository.CustomerRepository;
 import com.capintani.customerregistration.service.CustomerService;
+import com.capintani.customerregistration.util.CustomerCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,14 +26,7 @@ public class CustomerRegistrationTest {
 
     @BeforeEach
     public void setUp(){
-        Address address = createAddress();
-        Customer customer = new Customer.Builder()
-                .id(1L)
-                .name("Customer Name")
-                .cpf("79000000")
-                .address(address)
-                .email("email@gmail.com").build();
-
+        Customer customer = CustomerCreator.createCustomerToBeFinded();
         BDDMockito.when(customerRepository.save(ArgumentMatchers.any()))
                 .thenReturn(customer);
     }
@@ -41,11 +34,7 @@ public class CustomerRegistrationTest {
     @Test
     @DisplayName("Tests for save Customer")
     public void save_Customer_WhenSuccessful(){
-        Customer customer = new Customer.Builder()
-                .name("Customer Name")
-                .cpf("79000000")
-                .address(new Address())
-                .email("email@gmail.com").build();
+        Customer customer = CustomerCreator.createCustomerToBeSaved();
         customer = customerService.save(customer);
 
         Assertions.assertThat(customer).isNotNull();
@@ -62,15 +51,4 @@ public class CustomerRegistrationTest {
         Assertions.assertThat(customer.getAddress().getUf()).isNotNull();
     }
 
-
-    private Address createAddress() {
-        return new Address.Builder()
-                .id(1L)
-                .cep("79000001")
-                .streetAddress("Street Test 01")
-                .complement("")
-                .neighborhood("District Test 01")
-                .locality("Locality Test 01")
-                .uf("MS").build();
-    }
 }

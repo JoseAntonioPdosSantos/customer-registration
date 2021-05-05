@@ -2,6 +2,7 @@ package com.capintani.customerregistration.service.address;
 
 import com.capintani.customerregistration.service.ConsumeWhitRestTemplate;
 import com.capintani.customerregistration.service.ViaCepApiService;
+import com.capintani.customerregistration.util.AddressWrapperCreator;
 import com.capintani.customerregistration.wrapper.AddressWrapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @DisplayName("Tests for External API Address Service")
-public class ExternalApiAddressWrapperServiceTest {
+public class ExternalApiAddressWrapperCreatorServiceTest {
 
     @Mock
     private ConsumeWhitRestTemplate consumeWhitRestTemplate;
@@ -30,14 +31,7 @@ public class ExternalApiAddressWrapperServiceTest {
 
     @BeforeEach
     public void setUp(){
-        AddressWrapper addressTest01 = new AddressWrapper.Builder()
-                .cep("79000001")
-                .streetAddress("Street Test 01")
-                .complement("")
-                .neighborhood("District Test 01")
-                .locality("Locality Test 01")
-                .uf("MS").build();
-
+        AddressWrapper addressTest01 = AddressWrapperCreator.create();
         BDDMockito.when(consumeWhitRestTemplate.execute(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(ResponseEntity.of(Optional.of(addressTest01))));
     }
@@ -59,7 +53,6 @@ public class ExternalApiAddressWrapperServiceTest {
     @DisplayName("Throws invalid CEP")
     public void find_ThrowsInvalidCEP_WhenSuccessful(){
         String cep = "79000-0001";
-
         Assertions.assertThatThrownBy(() ->
             externalApiAddressService.find(cep))
                 .isInstanceOf(RuntimeException.class);

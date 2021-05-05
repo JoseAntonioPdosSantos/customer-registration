@@ -2,6 +2,7 @@ package com.capintani.customerregistration.repository;
 
 import com.capintani.customerregistration.model.Address;
 import com.capintani.customerregistration.model.Customer;
+import com.capintani.customerregistration.util.CustomerCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,26 +24,9 @@ class CustomerRepositoryTest {
     @Test
     @DisplayName("Save customer when successful")
     public void save_PersistCustomer_WhenSuccessful(){
-        Customer customer = customerRepository.save(createCustomer());
+        Customer customer = customerRepository.save(CustomerCreator.createCustomerToBeSaved());
         Assertions.assertThat(customer).isNotNull();
         Assertions.assertThat(customer.getId()).isNotNull();
     }
 
-    private Address createAddress() {
-        return new Address.Builder()
-                .cep("79000001")
-                .streetAddress("Street Test 01")
-                .complement("")
-                .neighborhood("District Test 01")
-                .locality("Locality Test 01")
-                .uf("MS").build();
-    }
-
-    private Customer createCustomer(){
-        return new Customer.Builder()
-                .name("Fulando de Tal")
-                .cpf("00000000000")
-                .address(createAddress())
-                .build();
-    }
 }
