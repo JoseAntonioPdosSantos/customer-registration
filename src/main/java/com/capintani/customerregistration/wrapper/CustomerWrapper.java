@@ -1,5 +1,7 @@
 package com.capintani.customerregistration.wrapper;
 
+import com.capintani.customerregistration.model.Customer;
+
 import java.io.Serializable;
 
 public class CustomerWrapper implements Serializable {
@@ -20,6 +22,14 @@ public class CustomerWrapper implements Serializable {
         setCpf(builder.cpf);
         setEmail(builder.email);
         setAddress(builder.address);
+    }
+
+    public CustomerWrapper(Customer customerWrapper) {
+        setId(customerWrapper.getId());
+        setName(customerWrapper.getName());
+        setCpf(customerWrapper.getCpf());
+        setEmail(customerWrapper.getEmail());
+        setAddress(new AddressWrapper(customerWrapper.getAddress()));
     }
 
     public Long getId() {

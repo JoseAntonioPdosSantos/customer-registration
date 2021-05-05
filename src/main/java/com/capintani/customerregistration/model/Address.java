@@ -1,5 +1,7 @@
 package com.capintani.customerregistration.model;
 
+import com.capintani.customerregistration.wrapper.AddressWrapper;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,6 +15,7 @@ public class Address implements Serializable {
     @SequenceGenerator(name="address_sequence", initialValue = 1)
     private Long id;
     private String cep;
+    private Long number;
     private String streetAddress;
     private String complement;
     private String neighborhood;
@@ -24,6 +27,7 @@ public class Address implements Serializable {
 
     public Address(Builder builder) {
         setId(builder.id);
+        setNumber(builder.number);
         setCep(builder.cep);
         setStreetAddress(builder.streetAddress);
         setComplement(builder.complement);
@@ -31,6 +35,18 @@ public class Address implements Serializable {
         setLocality(builder.locality);
         setUf(builder.uf);
     }
+
+    public Address(AddressWrapper addressWrapper) {
+        setId(addressWrapper.getId());
+        setNumber(addressWrapper.getNumber());
+        setCep(addressWrapper.getCep());
+        setStreetAddress(addressWrapper.getStreetAddress());
+        setComplement(addressWrapper.getComplement());
+        setNeighborhood(addressWrapper.getNeighborhood());
+        setLocality(addressWrapper.getLocality());
+        setUf(addressWrapper.getUf());
+    }
+
 
     public Long getId() {
         return id;
@@ -42,6 +58,14 @@ public class Address implements Serializable {
 
     public String getCep() {
         return cep;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public void setCep(String cep) {
@@ -103,6 +127,7 @@ public class Address implements Serializable {
 
     public static class Builder {
         private Long id;
+        private Long number;
         private String cep;
         private String streetAddress;
         private String complement;
@@ -112,6 +137,11 @@ public class Address implements Serializable {
 
         public Builder id(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder number(Long number) {
+            this.number = number;
             return this;
         }
 

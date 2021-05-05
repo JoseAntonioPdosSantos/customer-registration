@@ -1,5 +1,6 @@
 package com.capintani.customerregistration.wrapper;
 
+import com.capintani.customerregistration.model.Address;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -7,6 +8,7 @@ import java.io.Serializable;
 public class AddressWrapper implements Serializable {
 
     private Long id;
+    private Long number;
     private String cep;
     @JsonProperty("logradouro")
     private String streetAddress;
@@ -31,12 +33,30 @@ public class AddressWrapper implements Serializable {
         setUf(builder.uf);
     }
 
+    public AddressWrapper(Address address) {
+        setId(address.getId());
+        setCep(address.getCep());
+        setStreetAddress(address.getStreetAddress());
+        setComplement(address.getComplement());
+        setNeighborhood(address.getNeighborhood());
+        setLocality(address.getLocality());
+        setUf(address.getUf());
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 
     public String getCep() {

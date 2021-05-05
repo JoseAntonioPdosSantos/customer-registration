@@ -1,5 +1,8 @@
 package com.capintani.customerregistration.model;
 
+import com.capintani.customerregistration.wrapper.AddressWrapper;
+import com.capintani.customerregistration.wrapper.CustomerWrapper;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,6 +31,14 @@ public class Customer implements Serializable {
         setCpf(builder.cpf);
         setEmail(builder.email);
         setAddress(builder.address);
+    }
+
+    public Customer(CustomerWrapper customerWrapper) {
+        setId(customerWrapper.getId());
+        setName(customerWrapper.getName());
+        setCpf(customerWrapper.getCpf());
+        setEmail(customerWrapper.getEmail());
+        setAddress(new Address(customerWrapper.getAddress()));
     }
 
     public Long getId() {
@@ -68,6 +79,10 @@ public class Customer implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void setAddress(AddressWrapper addressWrapper) {
+        this.address = new Address(addressWrapper);
     }
 
     @Override
