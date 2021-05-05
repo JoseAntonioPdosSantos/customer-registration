@@ -3,8 +3,6 @@ package com.capintani.customerregistration.service.address;
 import com.capintani.customerregistration.service.ConsumeWhitRestTemplate;
 import com.capintani.customerregistration.service.ViaCepApiService;
 import com.capintani.customerregistration.wrapper.AddressWrapper;
-import com.capintani.customerregistration.wrapper.RestTemplateParams;
-import com.capintani.customerregistration.wrapper.ViaCepApiParams;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
