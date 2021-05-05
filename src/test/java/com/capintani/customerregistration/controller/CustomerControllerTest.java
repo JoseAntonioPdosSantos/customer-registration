@@ -1,5 +1,7 @@
 package com.capintani.customerregistration.controller;
 
+import com.capintani.customerregistration.exception.CepNotFoudException;
+import com.capintani.customerregistration.exception.EmailNotRegisteredException;
 import com.capintani.customerregistration.service.CustomerRegistrationService;
 import com.capintani.customerregistration.util.CustomerCreator;
 import com.capintani.customerregistration.util.CustomerWrapperCreator;
@@ -32,7 +34,13 @@ class CustomerControllerTest {
     public void setUp(){
         BDDMockito
                 .when(customerRegistrationService.save(ArgumentMatchers.any()))
-                .thenReturn(CustomerCreator.createCustomerToBeFinded());
+                .thenReturn(CustomerCreator.createCustomerToBeFinded())
+                .thenThrow(CepNotFoudException.class);
+
+        BDDMockito
+                .when(customerRegistrationService.findByEmail(ArgumentMatchers.anyString()))
+                .thenReturn(CustomerCreator.createCustomerToBeFinded())
+                .thenThrow(EmailNotRegisteredException.class);
     }
 
     @Test
@@ -70,5 +78,6 @@ class CustomerControllerTest {
         Assertions.assertThat(responseEntity.getBody().getAddress().getStreetAddress()).isNotNull();
         Assertions.assertThat(responseEntity.getBody().getAddress().getUf()).isNotNull();
     }
+
 
 }
