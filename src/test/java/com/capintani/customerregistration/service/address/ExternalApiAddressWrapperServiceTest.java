@@ -49,6 +49,10 @@ public class ExternalApiAddressWrapperServiceTest {
         Optional<AddressWrapper> address = externalApiAddressService.find(cep);
 
         Assertions.assertThat(address.get().getCep()).isNotNull();
+        Assertions.assertThat(address.get().getStreetAddress()).isNotNull();
+        Assertions.assertThat(address.get().getNeighborhood()).isNotNull();
+        Assertions.assertThat(address.get().getLocality()).isNotNull();
+        Assertions.assertThat(address.get().getUf()).isNotNull();
     }
 
     @Test
