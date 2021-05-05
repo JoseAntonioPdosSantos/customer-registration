@@ -51,6 +51,14 @@ public class ExternalApiAddressWrapperServiceTest {
         Assertions.assertThat(address.get().getCep()).isNotNull();
     }
 
+    @Test
+    @DisplayName("Find address by invalid CEP")
+    public void find_addressByInvalidCEP_WhenSuccessful(){
+        String cep = "79115-090";
+        Optional<AddressWrapper> address = externalApiAddressService.find(cep);
+
+        Assertions.assertThat(address.get().getCep()).isNotNull();
+    }
 
 
 
