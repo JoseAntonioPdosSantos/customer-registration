@@ -26,7 +26,7 @@ public class CustomerController {
 
     @GetMapping("/{email}")
     @ApiOperation(value = "Search by email")
-    public ResponseEntity<CustomerWrapper> findByEmail(@RequestAttribute String email){
+    public ResponseEntity<CustomerWrapper> findByEmail(@RequestParam String email){
         Customer customer = customerCustomerRegistrationService.findByEmail(email);
         return new ResponseEntity<>(new CustomerWrapper(customer), HttpStatus.CREATED);
     }
