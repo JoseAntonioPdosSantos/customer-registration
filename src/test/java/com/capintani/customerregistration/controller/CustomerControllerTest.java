@@ -6,6 +6,7 @@ import com.capintani.customerregistration.util.CustomerWrapperCreator;
 import com.capintani.customerregistration.wrapper.CustomerWrapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
+@DisplayName("Tests for Customer Controller")
 class CustomerControllerTest {
 
     @InjectMocks
@@ -34,6 +36,7 @@ class CustomerControllerTest {
     }
 
     @Test
+    @DisplayName("Save customer ")
     public void save_Customer_WhenSuccessful(){
         ResponseEntity<CustomerWrapper> responseEntity = customerController.save(CustomerWrapperCreator.createCustomerToBeSaved());
         Assertions.assertThat(responseEntity).isNotNull();
@@ -48,7 +51,24 @@ class CustomerControllerTest {
         Assertions.assertThat(responseEntity.getBody().getAddress().getNeighborhood()).isNotNull();
         Assertions.assertThat(responseEntity.getBody().getAddress().getStreetAddress()).isNotNull();
         Assertions.assertThat(responseEntity.getBody().getAddress().getUf()).isNotNull();
+    }
 
+    @Test
+    @DisplayName("Find customer by email")
+    public void find_CustomerByEmail_WhenSuccessful(){
+        ResponseEntity<CustomerWrapper> responseEntity = customerController.findByEmail("email@gmail.com");
+        Assertions.assertThat(responseEntity).isNotNull();
+        Assertions.assertThat(responseEntity.getStatusCode().value()).isEqualTo(201);
+        Assertions.assertThat(responseEntity.getBody().getId()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getName()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getCpf()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress().getId()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress().getCep()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress().getLocality()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress().getNeighborhood()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress().getStreetAddress()).isNotNull();
+        Assertions.assertThat(responseEntity.getBody().getAddress().getUf()).isNotNull();
     }
 
 }
