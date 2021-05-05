@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class AddressWrapper implements Serializable {
 
+    private Long id;
     private String cep;
     @JsonProperty("logradouro")
     private String streetAddress;
@@ -21,12 +22,21 @@ public class AddressWrapper implements Serializable {
     }
 
     public AddressWrapper(Builder builder) {
+        setId(builder.id);
         setCep(builder.cep);
         setStreetAddress(builder.streetAddress);
         setComplement(builder.complement);
         setNeighborhood(builder.neighborhood);
         setLocality(builder.locality);
         setUf(builder.uf);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCep() {
@@ -78,12 +88,18 @@ public class AddressWrapper implements Serializable {
     }
 
     public static class Builder {
+        private Long id;
         private String cep;
         private String streetAddress;
         private String complement;
         private String neighborhood;
         private String locality;
         private String uf;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder cep(String cep) {
             this.cep = cep;
