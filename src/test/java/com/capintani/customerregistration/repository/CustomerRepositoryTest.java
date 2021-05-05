@@ -1,6 +1,5 @@
 package com.capintani.customerregistration.repository;
 
-import com.capintani.customerregistration.model.Address;
 import com.capintani.customerregistration.model.Customer;
 import com.capintani.customerregistration.util.CustomerCreator;
 import org.assertj.core.api.Assertions;
