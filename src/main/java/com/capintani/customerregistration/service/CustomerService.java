@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService implements CustomerRegistrationService<Customer> {
 
+    private final CustomerRepository customerRepository;
+
     @Autowired
-    private CustomerRepository customerRepository;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public Customer save(Customer customer){
         return customerRepository.save(customer);
