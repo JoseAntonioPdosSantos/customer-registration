@@ -32,15 +32,14 @@ public class ExternalApiAddressWrapperServiceTest {
 
     @BeforeEach
     public void setUp(){
-        AddressWrapper addressTest01 = new AddressWrapper();
-        addressTest01.setCep("79000001");
-        addressTest01.setStreetAddress("Street Test 01");
-        addressTest01.setComplement("");
-        addressTest01.setNeighborhood("District Test 01");
-        addressTest01.setLocality("Locality Test 01");
-        addressTest01.setUf("MS");
+        AddressWrapper addressTest01 = new AddressWrapper.Builder()
+                .cep("79000001")
+                .streetAddress("Street Test 01")
+                .complement("")
+                .neighborhood("District Test 01")
+                .locality("Locality Test 01")
+                .uf("MS").build();
 
-        final String cep = "79000001";
         BDDMockito.when(consumeWhitRestTemplate.execute(ArgumentMatchers.any()))
                 .thenReturn(Optional.of(ResponseEntity.of(Optional.of(addressTest01))));
     }
