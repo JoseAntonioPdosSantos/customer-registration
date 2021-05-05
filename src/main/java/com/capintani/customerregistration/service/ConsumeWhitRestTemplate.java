@@ -4,13 +4,14 @@ import com.capintani.customerregistration.wrapper.AddressWrapper;
 import com.capintani.customerregistration.wrapper.RestTemplateParams;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Optional;
 
-@Component
+@Component("consumeWhitRestTemplate")
 public class ConsumeWhitRestTemplate implements ConsumeExternalApi<RestTemplateParams, ResponseEntity<AddressWrapper>> {
 
 
@@ -21,6 +22,6 @@ public class ConsumeWhitRestTemplate implements ConsumeExternalApi<RestTemplateP
                 .scheme(restTemplateParams.getScheme())
                 .host(restTemplateParams.getHost())
                 .path(restTemplateParams.getPath()).build();
-        return  Optional.ofNullable(restTemplate.getForEntity(uriComponents.toUriString(), AddressWrapper.class));
+        return  Optional.of(restTemplate.getForEntity(uriComponents.toUriString(), AddressWrapper.class));
     }
 }
