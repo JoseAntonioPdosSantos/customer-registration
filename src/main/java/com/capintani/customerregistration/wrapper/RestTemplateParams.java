@@ -1,10 +1,7 @@
 package com.capintani.customerregistration.wrapper;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 
-@Component
 public abstract class RestTemplateParams {
 
     private String scheme;
