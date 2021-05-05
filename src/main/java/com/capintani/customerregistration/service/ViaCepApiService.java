@@ -1,10 +1,9 @@
 package com.capintani.customerregistration.service;
 
+import com.capintani.customerregistration.exception.CepInvalidException;
 import com.capintani.customerregistration.validate.CepValidate;
 import com.capintani.customerregistration.wrapper.AddressWrapper;
-import com.capintani.customerregistration.wrapper.RestTemplateParams;
 import com.capintani.customerregistration.wrapper.ViaCepApiParams;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class ViaCepApiService implements ExternalApiAddressService<String, Addre
     @Override
     public Optional<AddressWrapper> find(String cep) {
         if(!new CepValidate().test(cep)){
-            throw new RuntimeException("The CEP entered is invalid.");
+            throw new CepInvalidException();
         }
         Optional<ResponseEntity<AddressWrapper>> wrapperResponseEntity = consumeExternalApi.execute(new ViaCepApiParams(cep));
         return wrapperResponseEntity.isPresent() ? Optional.of(wrapperResponseEntity.get().getBody()) : Optional.empty();
