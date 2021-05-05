@@ -1,9 +1,7 @@
 package com.capintani.customerregistration.controller;
 
-import com.capintani.customerregistration.model.Address;
 import com.capintani.customerregistration.model.Customer;
 import com.capintani.customerregistration.service.CustomerRegistrationService;
-import com.capintani.customerregistration.wrapper.AddressWrapper;
 import com.capintani.customerregistration.wrapper.CustomerWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
