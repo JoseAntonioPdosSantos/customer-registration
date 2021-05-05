@@ -25,6 +25,9 @@ public class CustomerWrapper implements Serializable {
     }
 
     public CustomerWrapper(Customer customerWrapper) {
+        if(customerWrapper == null){
+            return;
+        }
         setId(customerWrapper.getId());
         setName(customerWrapper.getName());
         setCpf(customerWrapper.getCpf());
