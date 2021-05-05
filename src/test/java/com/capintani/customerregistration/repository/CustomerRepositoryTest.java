@@ -1,4 +1,4 @@
-package com.capintani.customerregistration.respository;
+package com.capintani.customerregistration.repository;
 
 import com.capintani.customerregistration.model.Address;
 import com.capintani.customerregistration.model.Customer;
